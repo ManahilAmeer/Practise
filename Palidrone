@@ -1,0 +1,27 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	int i,f=0;
+	char b[10];
+	cout<<"Enter a Word:";
+	cin>>b;
+    int x=0;
+	do
+	{
+	   x++;
+	   i++;    	
+	}
+	while(b[i]!=0);
+	for(int d=0;d<x;d++)
+	{
+		if(b[d]==b[x-d-1]||(b[d]-32)==b[x-d-1]||b[d]==(b[x-d-1]-32))
+		f=1;
+		else
+		f=0;
+	}
+	if(f==1)
+	cout<<"Your word is Palidrone";
+	else
+	cout<<"not Palidrone";
+}
