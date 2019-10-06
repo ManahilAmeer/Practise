@@ -1,0 +1,202 @@
+
+#include <iostream>
+#include "pch.h"
+using namespace std;
+class Fraction
+{
+public:
+	int Numenator;
+	int Denominator;
+public:
+	Fraction()
+	{
+		Numenator = 0;
+		Denominator = 1;
+	}
+	Fraction(int numenator, int denominator)
+	{
+		Numenator = numenator;
+		Denominator = denominator;
+	}
+	friend bool operator > (Fraction F1, Fraction F2);
+	friend bool operator < (Fraction F1, Fraction F2);
+	friend bool operator >= (Fraction F1, Fraction F2);
+	friend bool operator <= (Fraction F1, Fraction F2);
+	friend bool operator == (Fraction F1, Fraction F2);
+	friend bool operator != (Fraction F1, Fraction F2);
+	friend Fraction operator / (Fraction F1, Fraction F2);
+	friend Fraction operator + (Fraction F1, Fraction F2);
+	friend Fraction operator - (Fraction F1, Fraction F2);
+	friend Fraction operator * (Fraction F1, Fraction F2);
+	friend istream &operator >> (istream &input, Fraction &F1);
+	friend ostream &operator << (ostream &output, Fraction &F1);
+};
+bool operator > (Fraction F1, Fraction F2)//Operator overloading function for greater than
+{
+	bool x = (F1.Numenator*F2.Denominator > F1.Denominator * F2.Numenator);
+	return x;
+}
+bool operator < (Fraction F1, Fraction F2)//Operator overloading function for less than
+{
+	bool x = (F1.Numenator*F2.Denominator < F1.Denominator * F2.Numenator);
+	return x;
+}
+bool operator >= (Fraction F1, Fraction F2)//Operator overloading function for greater than or equality
+{
+	bool x = (F1.Numenator*F2.Denominator >= F1.Denominator * F2.Numenator);
+	return x;
+}
+bool operator <= (Fraction F1, Fraction F2)//Operator overloading function for less than or equality
+{
+	bool x = (F1.Numenator*F2.Denominator <= F1.Denominator * F2.Numenator);
+	return x;
+}
+bool operator == (Fraction F1, Fraction F2)//Operator overloading function for equality
+{
+	bool x = (F1.Numenator*F2.Denominator == F1.Denominator * F2.Numenator);
+	return x;
+}
+bool operator != (Fraction F1, Fraction F2)//Operator overloading function for disequality
+{
+	bool x = (F1.Numenator*F2.Denominator != F1.Denominator * F2.Numenator);
+	return x;
+}
+Fraction operator / (Fraction F1, Fraction F2)//Operator overloading function for division
+{
+	Fraction F3;
+	F3.Numenator = F1.Numenator * F2.Denominator;
+	F3.Denominator = F1.Denominator * F2.Numenator;
+	if (F3.Numenator%F3.Denominator == 0)
+	{
+		F3.Numenator = F3.Numenator / F3.Denominator;
+		F3.Denominator = F3.Denominator / F3.Denominator;
+	}if (F3.Denominator%F3.Numenator == 0)
+	{
+		F3.Denominator = F3.Denominator / F3.Numenator;
+		F3.Numenator = F3.Numenator / F3.Numenator;
+	}
+	return F3;
+}
+Fraction operator + (Fraction F1, Fraction F2)// Operator overloading function for addition
+{
+	Fraction F3;
+	if (F1.Denominator != F2.Denominator)
+		F3.Numenator = F1.Numenator * F2.Denominator + F2.Numenator*F1.Denominator;
+	else
+		F3.Numenator = F1.Numenator + F2.Numenator;
+	if (F1.Denominator != F2.Denominator)
+		F3.Denominator = F1.Denominator * F2.Denominator;
+	else
+		F3.Denominator = F1.Denominator;
+	if (F3.Numenator%F3.Denominator == 0)
+	{
+		F3.Numenator = F3.Numenator / F3.Denominator;
+		F3.Denominator = F3.Denominator / F3.Denominator;
+	}if (F3.Denominator%F3.Numenator == 0)
+	{ 
+		F3.Denominator = F3.Denominator / F3.Numenator;
+		F3.Numenator = F3.Numenator / F3.Numenator;
+	}
+		
+	return F3;
+}
+Fraction operator - (Fraction F1, Fraction F2)//Operator overloading function for subtraction
+{
+	Fraction F3;
+	if (F1.Denominator != F2.Denominator)
+		F3.Numenator = F1.Numenator * F2.Denominator - F2.Numenator*F1.Denominator;
+	else
+		F3.Numenator = F1.Numenator - F2.Numenator;
+	if (F1.Denominator != F2.Denominator)
+		F3.Denominator = F1.Denominator * F2.Denominator;
+	else
+		F3.Denominator = F1.Denominator;
+	if (F3.Numenator%F3.Denominator == 0)
+	{
+		F3.Numenator = F3.Numenator / F3.Denominator;
+		F3.Denominator = F3.Denominator / F3.Denominator;
+	}
+	return F3;
+}
+Fraction operator * (Fraction F1, Fraction F2)//Operator overloading function for multiplication
+{
+	Fraction F3;
+	F3.Numenator = F1.Numenator * F2.Numenator;
+	F3.Denominator = F1.Denominator * F2.Denominator;
+	if (F3.Numenator%F3.Denominator == 0)
+	{
+		F3.Numenator = F3.Numenator / F3.Denominator;
+		F3.Denominator = F3.Denominator / F3.Denominator;
+	}if (F3.Denominator%F3.Numenator == 0)
+	{
+		F3.Denominator = F3.Denominator / F3.Numenator;
+		F3.Numenator = F3.Numenator / F3.Numenator;
+	}
+	return F3;
+}
+istream &operator >> (istream &input, Fraction &F1)//Operator overloading function for input i.e cin
+{
+	char slash;
+	input >> F1.Numenator >> slash >> F1.Denominator;
+	return input;
+}
+ostream &operator << (ostream &output, Fraction &F1)//Operator overloading function for output i.e cout
+{
+	output << F1.Numenator << "/" << F1.Denominator;
+	return output;
+}
+
+int main()
+{
+	char choice;
+	Fraction f1(5,2);
+	Fraction f2(4, 2);
+	cout << "The first fraction is =" << f1<<endl;
+	cout << "The second fraction is =" << f2<<endl<<endl;
+	cout << "Do you want to enter value of fractions by yourself(Y/N):";
+	cin >> choice;
+	if (choice == 'Y' || choice == 'y')
+	{
+		cout << "Enter first fraction: ";
+		cin >> f1;
+		cout << "Enter second fraction: ";
+		cin >> f2;
+		cout << "The first fraction is =" << f1<<endl<<endl;
+		cout << "The second fraction is =" << f2<<endl<<endl;
+	}
+	Fraction f3 = f1 + f2;
+	cout<<"The sum of the fraction "<<f1<<" and " <<f2<<" is ="<< f3<<endl<<endl;
+	f3 = f1 - f2;
+		cout << "The subtraction of the fraction " << f1 << " and " << f2 << " is =" << f3 << endl << endl;
+	f3 = f1 / f2;
+	cout << "The division of the fraction " << f1 << " and " << f2 << " is =" << f3 << endl << endl;
+	f3 = f1 * f2;
+	cout << "The multiplication of the fraction " << f1 << " and " << f2 << " is =" << f3 << endl << endl;
+	cout << "The fraction " << f1 << " and " << f2 << " are ";
+
+	if (f1 == f2)
+		cout<<"Equal"<<endl << endl;
+	else
+		cout<< "Not equal"<<endl << endl;
+	cout << "Is fraction " << f1 << " greater than or equal to " << f2<<"?"<<endl;
+	if (f1 >= f2)
+		cout << "It is greater than or Equal " << endl << endl;
+	else
+		cout << "It is not greater than or equal" << endl << endl;
+	cout << "Is fraction " << f1 << "smaller than or equal to " << f2 << "?" << endl;
+	if (f1 <= f2)
+		cout << "It is smaller than or Equal " << endl << endl;
+	else
+		cout << "It  is  not smaller than or equal" << endl << endl;
+	cout << "Is fraction " << f1 << " greater than " << f2 << "?" << endl;
+	if (f1 >f2)
+		cout << "It is greater than " << endl << endl;
+	else
+		cout << "It is not greater than " << endl << endl;
+	cout << "Is fraction " << f1 << " greater than " << f2 << "?" << endl;
+	if (f1 < f2)
+		cout << "It is smaller than " << endl << endl;
+	else
+		cout << "It is not smaller than " << endl << endl;
+
+}
