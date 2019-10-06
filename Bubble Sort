@@ -1,0 +1,45 @@
+#include<iostream>
+using namespace std;
+void bubbleSort(int[], int);
+void displaySort(int[], int);
+int main()
+{
+	int size = 5;
+	int values[5] = {19,-4,91,0,-17};
+	cout << "the values before bubble sort are:" << endl;
+	displaySort(values, size);
+
+	bubbleSort(values, size);
+	cout << "The values after Bubble sort are:" << endl;
+	displaySort(values, size);
+
+}
+void displaySort(int arr[], int elmn)
+{
+	for (int i = 0; i < elmn; i++)
+	{
+		cout << arr[i] << " " << endl;
+	}
+}
+void bubbleSort(int arr[], int elmn)
+{
+	bool swap;
+	int temp;
+	int bottom = elmn - 1;
+	do {
+		swap = false;
+		for (int y = 0; y < bottom; y++)
+		{
+			if (arr[y] > arr[y + 1])
+			{
+				temp = arr[y];
+				arr[y] = arr[y + 1];
+				arr[y + 1] = temp;
+				swap = true;
+			}
+		}
+	
+	} while (swap != false);
+	
+
+	}
